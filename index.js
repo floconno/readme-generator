@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const { writeFile } = require('fs').promises;
-const generateMarkdown = require('generateMarkdown');
+const {generateMarkdown} = require('./utils/generateMarkdown');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -99,7 +99,7 @@ const promptUser = () => {
 
 const init = () => {
     promptUser()
-      .then((answers) => writeFile('README.md', generateMarkdown(answers)))
+      .then((answers) => writeFile('./dist/README.md', generateMarkdown(answers)))
       .then(() => console.log('Successfully generated README.md!'))
       .catch((err) => console.error(err));
   };

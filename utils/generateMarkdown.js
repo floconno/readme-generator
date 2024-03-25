@@ -25,8 +25,7 @@ function renderLicenseSection(answers) {
     if (answers.license === "NONE") {
       return "";
     } else {
-      return `
-      ## License
+      return `## License
       The license for this project is ${answers.license}.`
     }
 }
@@ -70,4 +69,4 @@ function generateMarkdown(answers) {
 `;
 }
 
-module.exports = generateMarkdown;
+module.exports = {generateMarkdown};
