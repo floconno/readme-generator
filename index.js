@@ -1,10 +1,10 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const fs = require('fs');
+const { writeFile } = require('fs').promises;
 const generateMarkdown = require('generateMarkdown');
 
-function readmeContents() {
-    inquirer.prompt([
+const promptUser = () => {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'title',
@@ -94,36 +94,17 @@ function readmeContents() {
             name: 'email',
             message: 'What is your email address?', 
         },
-    ])
-    .then(response => {
-        let shape;
-        if(response.shape === "triangle") {
-            shape = new Triangle
-        } else if (response.shape === "square") {
-            shape = new Square
-        } else {
-            shape = new Circle
-        }
-        shape.setColor(response.shapeColor)
+    ]);
+};
 
-        const svg = `
-        <svg version="1.1" width="300" height="400" xmlns="http://www.w3.org/2000/svg">
-
-        ${shape.render()}
-
-        <text x="150" y="125" font-size="40" text-anchor="middle" fill="${response.textColor}">${response.text}</text>
-
-        </svg>
-        `
-
-        fs.writeFile('logo.svg', svg, (err) =>
-        err ? console.log(err) : console.log('Generated logo.svg')
-      );
-    }) 
-}
-
-readmeContents();
-
+const init = () => {
+    promptUser()
+      .then((answers) => writeFile('README.md', generateMarkdown(answers)))
+      .then(() => console.log('Successfully generated README.md!'))
+      .catch((err) => console.error(err));
+  };
+  
+  init();
 
 
 
