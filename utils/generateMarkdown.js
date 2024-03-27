@@ -1,13 +1,13 @@
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(answers) {
-    if (answers.license === "NONE") {
-      return "";
-    } else {
-      return `![GitHub License](https://img.shields.io/github/license/${answers.username}/${answers.title})
-      `
+    if (answers.license !== "NONE") {
+    return `![License](https://img.shields.io/badge/License-${answers.license}.0-blue.svg)
+      `;
     }
-}
+    return "";
+    }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
@@ -69,4 +69,8 @@ function generateMarkdown(answers) {
 `;
 }
 
+
+
+
 module.exports = {generateMarkdown};
+
